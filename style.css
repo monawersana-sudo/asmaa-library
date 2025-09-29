@@ -1,0 +1,131 @@
+body {
+  font-family: "Tahoma", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+
+header {
+  background-color: #f8bbd0; /* وردي فاتح */
+  color: #333;
+  text-align: center;
+  padding: 15px;
+}
+
+header h1 {
+  margin: 5px 0;
+}
+
+header button {
+  background-color: #f48fb1;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+header button:hover {
+  background-color: #f06292;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+}
+
+aside {
+  width: 180px;
+  background-color: #fce4ec;
+  padding: 15px;
+  border-left: 2px solid #f8bbd0;
+}
+
+aside h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+aside button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  background-color: #f48fb1;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+aside button:hover {
+  background-color: #f06292;
+  color: #fff;
+}
+
+main {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.grade {
+  margin-bottom: 30px;
+}
+
+.story-card {
+  display: inline-block;
+  width: 160px;
+  margin: 10px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #f8bbd0;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.story-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.story-card h3 {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.story-card button,
+.story-card a {
+  display: inline-block;
+  margin: 5px 3px;
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.story-card button {
+  background-color: #f48fb1;
+  color: #fff;
+}
+
+.story-card button:hover {
+  background-color: #f06292;
+}
+
+.story-card a {
+  background-color: #fce4ec;
+  color: #333;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #f8bbd0;
+  font-size: 14px;
+  margin-top: 20px;
+}

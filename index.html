@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 مكتبة المدرسة</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📚 المكتبة الإلكترونية</h1>
+    <h2>مدرسة أسماء بنت يزيد الأساسية للبنات\جرش 📚</h2>
+    <button onclick="adminLogin()">لوحة التحكم</button>
+  </header>
+
+  <div class="container">
+    <aside>
+      <h3>الصفوف</h3>
+      <button onclick="renderStoriesByGrade(1)">الصف الأول</button>
+      <button onclick="renderStoriesByGrade(2)">الصف الثاني</button>
+      <button onclick="renderStoriesByGrade(3)">الصف الثالث</button>
+      <button onclick="renderStoriesByGrade(4)">الصف الرابع</button>
+      <button onclick="renderStoriesByGrade(5)">الصف الخامس</button>
+      <button onclick="renderStoriesByGrade(6&7)">الصف السادس   &   الصف السابع</button>
+    </aside>
+
+    <main id="content">
+      <p>👈 اختر الصف من القائمة لعرض القصص</p>
+    </main>
+  </div>
+
+  <footer>
+    <p>إعداد المعلمة: <strong>سناء مناور العتوم</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
