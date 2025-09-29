@@ -62,6 +62,8 @@ let defaultStories = [
   { title: "قصة آدم عليه السلام", file: "stories/grade5/story65.pdf", grade: 5 , cover: "images/story65_cover.png" },
   { title: "الأرنب يفقد أسنانه", file: "stories/grade5/story66.pdf", grade: 5 , cover: "images/story66_cover.png" },
   { title: "الأمانة", file: "stories/grade5/story67.pdf", grade: 5 , cover: "images/story67_cover.png" },
+  { title: "ألف ليلة وليلة (وعد الحر )", file: "stories/grade5/story73.pdf", grade: 5 , cover: "images/story73_cover.png" },
+  { title: "أهل الثقافة", file: "stories/grade5/story74.pdf", grade: 5 , cover: "images/story74_cover.png" },
 
   { title: "كوكبنا الجميل", file: "stories/grade6/story54.pdf", grade: 6&7 , cover: "images/story54_cover.png" },
   { title: "الثعلب فيروز", file: "stories/grade6/story55.pdf", grade: 6&7 , cover: "images/story55_cover.png" },
@@ -73,7 +75,9 @@ let defaultStories = [
   { title: "الذهب الأخضر", file: "stories/grade6/story68.pdf", grade: 6&7 , cover: "images/story68_cover.png" },
   { title: "أمير في بلاد الأقزام", file: "stories/grade6/story69.pdf", grade: 6&7 , cover: "images/story69_cover.png" },
   { title: "السمكة الذهبية", file: "stories/grade6/story70.pdf", grade: 6&7 , cover: "images/story70_cover.png" },
-  { title: "قصة أرنوب و أول يوم في المدرسة", file: "stories/grade6/story71.pdf", grade: 6&7 , cover: "images/story71_cover.png" }
+  { title: "قصة أرنوب و أول يوم في المدرسة", file: "stories/grade6/story71.pdf", grade: 6&7 , cover: "images/story71_cover.png" },
+   { title: "عرفان المخلص", file: "stories/grade6/story72.pdf", grade: 6&7 , cover: "images/story72_cover.png" },
+{ title: "ولا تجسسوا", file: "stories/grade6/story75.pdf", grade: 6&7 , cover: "images/story75_cover.png" }
 ];
 
 // عرض القصص حسب الصف
