@@ -69,7 +69,6 @@ let defaultStories = [
   { title: "الثعلب فيروز", file: "stories/grade6/story55.pdf", grade: 6&7 , cover: "images/story55_cover.png" },
   { title: "انكسر الشر", file: "stories/grade6/story56.pdf", grade: 6&7 , cover: "images/story56_cover.png" },
   { title: "العملاق المائي", file: "stories/grade6/story57.pdf", grade: 6&7 , cover: "images/story57_cover.png" },
-  { title: "ما أحلى الحرية", file: "stories/grade6/story58.pdf", grade: 6&7 , cover: "images/story58_cover.png" },
   { title: "البطاقة العجيبة", file: "stories/grade6/story59.pdf", grade: 6&7 , cover: "images/story59_cover.png" },
   { title: "من هزم شرير التبذير", file: "stories/grade6/story60.pdf", grade: 6&7 , cover: "images/story60_cover.png" },
   { title: "الذهب الأخضر", file: "stories/grade6/story68.pdf", grade: 6&7 , cover: "images/story68_cover.png" },
