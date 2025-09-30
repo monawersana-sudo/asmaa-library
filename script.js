@@ -21,7 +21,7 @@ let defaultStories = [
     { title: "اللعبة المفقودة", file: "stories/grade2/story20.pdf", grade: 2 , cover: "images/story20_cover.png" },
     { title: "هدايا العيد", file: "stories/grade2/story21.pdf", grade: 2 , cover: "images/story21_cover.png" },
     { title: "انها زهرة واحدة", file: "stories/grade2/story22.pdf", grade: 2 , cover: "images/story22_cover.png" },
-{ title: "يحيى العدل", file: "stories/grade2/story23.pdf", grade: 2 , cover: "images/story23_cover.png" },
+{ title: "يحيا العدل", file: "stories/grade2/story23.pdf", grade: 2 , cover: "images/story23_cover.png" },
   { title: "أجمل مدرسة في العالم", file: "stories/grade2/story63.pdf", grade: 2 , cover: "images/story63_cover.png" },
   { title: "ماذا جرى", file: "stories/grade2/story50.pdf", grade: 2 , cover: "images/story50_cover.png" },
 
@@ -40,7 +40,7 @@ let defaultStories = [
     { title: "لارا الخنفساء الصفراء", file: "stories/grade3/story86.pdf", grade: 3 , cover: "images/story86_cover.png" },
 
     { title: "قصة القمر", file: "stories/grade4/story37.pdf", grade: 4 , cover: "images/story37_cover.png" },
-  { title: "لماذا لا تقرأيا لؤي", file: "stories/grade4/story38.pdf", grade: 4 , cover: "images/story38_cover.png" },
+  { title: "لماذا لا تقرأ يا لؤي", file: "stories/grade4/story38.pdf", grade: 4 , cover: "images/story38_cover.png" },
   { title: "حسن في المستشفى", file: "stories/grade4/story39.pdf", grade: 4 , cover: "images/story39_cover.png" },
   { title: "من أجلك", file: "stories/grade4/story40.pdf", grade: 4 , cover: "images/story40_cover.png" },
   { title: "قصة ابراهيم عليه السلام", file: "stories/grade4/story41.pdf", grade: 4 , cover: "images/story41_cover.png" },
