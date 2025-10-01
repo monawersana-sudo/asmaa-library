@@ -15,7 +15,6 @@ let defaultStories = [
   { title: "أوراق الزينة", file: "stories/grade2/story13.pdf", grade: 2 , cover: "images/story13_cover.png" },
   { title: "دبدوب العسل", file: "stories/grade2/story14.pdf", grade: 2 , cover: "images/story14_cover.png" },
   { title: "مغامرات الحروف", file: "stories/grade2/story16.pdf", grade: 2 , cover: "images/story16_cover.png" },
-  { title: "القمر الصغير", file: "stories/grade2/story17.pdf", grade: 2 , cover: "images/story17_cover.png" },
   { title: "عند شجرة البرتقال", file: "stories/grade2/story18.pdf", grade: 2 , cover: "images/story18_cover.png" },
    { title: "لا", file: "stories/grade2/story19.pdf", grade: 2 , cover: "images/story19_cover.png" },
     { title: "اللعبة المفقودة", file: "stories/grade2/story20.pdf", grade: 2 , cover: "images/story20_cover.png" },
@@ -62,7 +61,7 @@ let defaultStories = [
   { title: "الأرنب يفقد أسنانه", file: "stories/grade5/story66.pdf", grade: 5 , cover: "images/story66_cover.png" },
   { title: "الأمانة", file: "stories/grade5/story67.pdf", grade: 5 , cover: "images/story67_cover.png" },
   { title: "ألف ليلة وليلة (وعد الحر )", file: "stories/grade5/story73.pdf", grade: 5 , cover: "images/story73_cover.png" },
-  { title: "سمكة الطارة الورقية ", file: "stories/grade5/story74.pdf", grade: 5 , cover: "images/story74_cover.png" },
+  { title: "سمكة الطائرة الورقية ", file: "stories/grade5/story74.pdf", grade: 5 , cover: "images/story74_cover.png" },
   { title: "قصة أرنوب و أول يوم في المدرسة", file: "stories/grade5/story71.pdf", grade: 5 , cover: "images/story71_cover.png" },
 
   { title: "لغز الجدة ", file: "stories/grade6/story54.pdf", grade: 6 , cover: "images/story54_cover.png" },
