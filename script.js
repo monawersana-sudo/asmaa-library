@@ -54,7 +54,6 @@ let defaultStories = [
   { title: "ريشو و جميلة", file: "stories/grade5/story48.pdf", grade: 5 , cover: "images/story48_cover.png" }, 
     { title: "من أين يأتي الأكسجين", file: "stories/grade5/story49.pdf", grade: 5 , cover: "images/story49_cover.png" },
     { title: "أين رحلت الشمس", file: "stories/grade5/story95.pdf", grade: 5 , cover: "images/story95_cover.png" },
-  { title: "حين غضب الديك", file: "stories/grade5/story51.pdf", grade: 5 , cover: "images/story51_cover.png" },
   { title: "من الأهم", file: "stories/grade5/story52.pdf", grade: 5 , cover: "images/story52_cover.png" },
   { title: "جنى وندى وكريات الألوان", file: "stories/grade5/story53.pdf", grade: 5 , cover: "images/story53_cover.png" },
   { title: "قصة آدم عليه السلام", file: "stories/grade5/story65.pdf", grade: 5 , cover: "images/story65_cover.png" },
