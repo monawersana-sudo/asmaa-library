@@ -1,5 +1,5 @@
 // رابط Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbwCPWeNg5P32fRIh2yFtS3Mx0RaGjK0zVItB5HrDnWUcQgHtTThPxw_2INVyr2OIpZa/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxNldkoCIZGXIg6SjVDluKMy12MDK8GYVIKuVod8ej36C9HmRpvf4SZ2x_pZPcLqhUt_Q/exec";
 
 // جميع القصص الكاملة من الصف الأول إلى السابع
 const defaultStories = [
@@ -84,7 +84,6 @@ const defaultStories = [
   { title: "البخيل و زوجته الجشعة", file: "stories/grade7/story83.pdf", grade: 7 , cover: "images/story83_cover.png" },
   { title: "لويس برايل", file: "stories/grade7/story90.pdf", grade: 7 , cover: "images/story90_cover.png" }
 ];
-
 // عرض القصص حسب الصف
 function renderStoriesByGrade(grade) {
   const content = document.getElementById("content");
