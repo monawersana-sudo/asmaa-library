@@ -1,5 +1,5 @@
 // رابط Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbyPwkogWR28H4T2KxhSL0El-buDURVQD7kL0T2ZQ75-6Z2-27wFr0JykuuvnVdWkv7GqQ/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwCPWeNg5P32fRIh2yFtS3Mx0RaGjK0zVItB5HrDnWUcQgHtTThPxw_2INVyr2OIpZa/exec";
 
 // جميع القصص الكاملة من الصف الأول إلى السابع
 const defaultStories = [
@@ -84,6 +84,7 @@ const defaultStories = [
   { title: "البخيل و زوجته الجشعة", file: "stories/grade7/story83.pdf", grade: 7 , cover: "images/story83_cover.png" },
   { title: "لويس برايل", file: "stories/grade7/story90.pdf", grade: 7 , cover: "images/story90_cover.png" }
 ];
+
 // عرض القصص حسب الصف
 function renderStoriesByGrade(grade) {
   const content = document.getElementById("content");
@@ -121,7 +122,7 @@ function readStory(title, file) {
   localStorage.setItem("studentsData", JSON.stringify(data));
 
   // حفظ على Google Sheets
-  fetch(SHEET_URL, {"https://script.google.com/macros/s/AKfycbyPwkogWR28H4T2KxhSL0El-buDURVQD7kL0T2ZQ75-6Z2-27wFr0JykuuvnVdWkv7GqQ/exec"}
+  fetch(SHEET_URL, {
     method: "POST",
     body: JSON.stringify({ name: studentName, story: title }),
     headers: { "Content-Type": "application/json" }
