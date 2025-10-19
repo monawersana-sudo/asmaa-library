@@ -1,5 +1,5 @@
 // رابط Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxhdVvcbwA8IyOZUYltmPQKm2TVQIGVeoJo_INg5BDBvHl-0qJxa6TpYonOwz0VpzpFhg/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbyPwkogWR28H4T2KxhSL0El-buDURVQD7kL0T2ZQ75-6Z2-27wFr0JykuuvnVdWkv7GqQ/exec";
 
 // جميع القصص الكاملة من الصف الأول إلى السابع
 const defaultStories = [
@@ -121,7 +121,7 @@ function readStory(title, file) {
   localStorage.setItem("studentsData", JSON.stringify(data));
 
   // حفظ على Google Sheets
-  fetch(SHEET_URL, {
+  fetch(SHEET_URL, {"https://script.google.com/macros/s/AKfycbyPwkogWR28H4T2KxhSL0El-buDURVQD7kL0T2ZQ75-6Z2-27wFr0JykuuvnVdWkv7GqQ/exec"}
     method: "POST",
     body: JSON.stringify({ name: studentName, story: title }),
     headers: { "Content-Type": "application/json" }
