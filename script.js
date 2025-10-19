@@ -1,7 +1,7 @@
 // رابط Google Apps Script
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxhdVvcbwA8IyOZUYltmPQKm2TVQIGVeoJo_INg5BDBvHl-0qJxa6TpYonOwz0VpzpFhg/exec";
 
-// القصص الأصلية
+// جميع القصص الكاملة من الصف الأول إلى السابع
 const defaultStories = [
   { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
   { title: "لارا الخنفساء الصفراء", file: "stories/grade1/story86.pdf", grade: 1 , cover: "images/story86_cover.png" },
