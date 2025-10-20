@@ -1,9 +1,9 @@
-// رابط Google Sheets Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby0VgQ6khGwgWd1zJU9Ksv05-Tb2L18bnwDbWgt-9lZEQU0AHK42dbUsj6tPAHQTslY/exec";
+// رابط Google Apps Script
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzo4alfbmgq7Urjk_BqJ2AOumRqjIQoLFvK0m7EXQ1ZFx1G0CIkwtpFtyCRf9X1RcnY/exec";
 
-// تحميل القصص الافتراضية (لا تغيير)
-let defaultStories = [
-   { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
+// جميع القصص الكاملة من الصف الأول إلى السابع
+const defaultStories = [
+  { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
   { title: "لارا الخنفساء الصفراء", file: "stories/grade1/story86.pdf", grade: 1 , cover: "images/story86_cover.png" },
   { title: "أنا ساساعد ", file: "stories/grade1/story1.pdf", grade: 1 , cover: "images/story1_cover.png" },
   { title: " أغنية زينة ", file: "stories/grade1/story2.pdf", grade: 1 , cover: "images/story2_cover.png" },
@@ -84,77 +84,99 @@ let defaultStories = [
   { title: "البخيل و زوجته الجشعة", file: "stories/grade7/story83.pdf", grade: 7 , cover: "images/story83_cover.png" },
   { title: "لويس برايل", file: "stories/grade7/story90.pdf", grade: 7 , cover: "images/story90_cover.png" }
 ];
+// عرض القصص حسب الصف
+function renderStoriesByGrade(grade) {
+  const content = document.getElementById("content");
+  content.innerHTML = "";
 
-let studentName = localStorage.getItem("studentName") || "";
-let storiesRead = JSON.parse(localStorage.getItem("storiesRead") || "[]");
+  const filtered = defaultStories.filter(story => story.grade === grade);
 
-// تسجيل اسم الطالبة
-function saveStudentName() {
-  const nameInput = document.getElementById("studentName");
-  if (nameInput && nameInput.value.trim() !== "") {
-    studentName = nameInput.value.trim();
-    localStorage.setItem("studentName", studentName);
-    alert("تم حفظ الاسم بنجاح");
-  }
+  const section = document.createElement("section");
+  section.className = "grade";
+
+  filtered.forEach(story => {
+    const card = document.createElement("div");
+    card.className = "story-card";
+    card.innerHTML = `
+      <img src="${story.cover}" alt="${story.title}">
+      <h3>${story.title}</h3>
+      <button onclick="readStory('${story.title}', '${story.file}')">📖 قراءة</button>
+      <a href="${story.file}" download>⬇️ تحميل</a>
+    `;
+    section.appendChild(card);
+  });
+
+  content.appendChild(section);
 }
 
-// عند قراءة قصة
-function markStoryAsRead(title) {
-  if (!studentName) {
-    alert("يرجى إدخال اسم الطالبة أولاً");
-    return;
-  }
+// قراءة قصة + حفظ في Google Sheets
+function readStory(title, file) {
+  const studentName = prompt("👩‍🎓 أدخل اسمك:");
+  if (!studentName) return;
 
-  if (!storiesRead.includes(title)) {
-    storiesRead.push(title);
-    localStorage.setItem("storiesRead", JSON.stringify(storiesRead));
-    updateSheet();
-  }
-}
+  // تخزين محلي
+  const data = JSON.parse(localStorage.getItem("studentsData")) || {};
+  if (!data[studentName]) data[studentName] = [];
+  if (!data[studentName].includes(title)) data[studentName].push(title);
+  localStorage.setItem("studentsData", JSON.stringify(data));
 
-// إرسال البيانات إلى Google Sheet
-function updateSheet() {
+  // حفظ على Google Sheets
   fetch(SHEET_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name: studentName,
-      storyCount: storiesRead.length
-    })
+    body: JSON.stringify({ name: studentName, story: title }),
+    headers: { "Content-Type": "application/json" }
   })
   .then(res => res.text())
-  .then(txt => console.log("تم التحديث:", txt))
-  .catch(err => console.error("خطأ:", err));
+  .then(console.log)
+  .catch(console.error);
+
+  // فتح القصة
+  window.open(file, "_blank");
 }
 
-// عند تحميل لوحة التحكم (admin.html)
-function loadDashboard() {
+// Dashboard - عرض من Google Sheets
+function showDashboard() {
+  const content = document.getElementById("content");
+  content.innerHTML = "<p>⏳ جاري تحميل البيانات...</p>";
+
   fetch(SHEET_URL)
     .then(res => res.json())
     .then(data => {
-      const tableBody = document.getElementById("studentsTableBody");
-      if (!tableBody) return;
-      tableBody.innerHTML = "";
+      const studentCounts = {};
 
       data.forEach(row => {
-        const tr = document.createElement("tr");
-        const nameTd = document.createElement("td");
-        const countTd = document.createElement("td");
-
-        nameTd.textContent = row.name;
-        countTd.textContent = row.storyCount;
-
-        tr.appendChild(nameTd);
-        tr.appendChild(countTd);
-        tableBody.appendChild(tr);
+        if (!studentCounts[row.name]) studentCounts[row.name] = new Set();
+        studentCounts[row.name].add(row.story);
       });
+
+      let html = `
+        <h2>📊 لوحة متابعة الطلاب</h2>
+        <table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;text-align:center;">
+          <tr style="background:#f0e6ff;"><th>اسم الطالبة</th><th>عدد القصص المقروءة</th></tr>
+      `;
+
+      for (let name in studentCounts) {
+        html += `<tr><td>${name}</td><td>${studentCounts[name].size}</td></tr>`;
+      }
+
+      html += `</table>
+      <br>
+      <button onclick="renderStoriesByGrade(1)">⬅️ رجوع</button>`;
+
+      content.innerHTML = html;
     })
-    .catch(err => console.error("Error loading data:", err));
+    .catch(err => {
+      console.error(err);
+      content.innerHTML = "<p>⚠️ حدث خطأ أثناء تحميل البيانات.</p>";
+    });
 }
 
-// استدعاء لوحة التحكم تلقائيًا عند وجود الجدول
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("studentsTableBody")) {
-    loadDashboard();
+// تسجيل دخول الأدمن
+function adminLogin() {
+  const password = prompt("🔑 أدخل كلمة المرور:");
+  if (password === "1974") {
+    showDashboard();
+  } else {
+    alert("❌ كلمة المرور خاطئة!");
   }
-});
+}
