@@ -1,5 +1,5 @@
 // رابط Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzo4alfbmgq7Urjk_BqJ2AOumRqjIQoLFvK0m7EXQ1ZFx1G0CIkwtpFtyCRf9X1RcnY/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbzTLP50DLLnLGnkZh2GoYGA88p90PwjsxhzMm5ONiZP_4DaUUGjO_7Is9mGx5OGxZRj/exec";
 
 // جميع القصص الكاملة من الصف الأول إلى السابع
 const defaultStories = [
