@@ -1,5 +1,5 @@
 // 📡 رابط Google Apps Script الجديد
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxKfwyQXMlbk5pSbErsSp_JYJvMbojmeQ0qiDLzHfaSgbNhs-xTUvM33jx261ENaFLV/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnHW1XWSoB-sI3_hMaRcMBGv0TN3ocaB4223wHshfVXZpcaKdvzYeq3NV8XGC5siy4/exec";
 
 // 🏫 جميع القصص حسب الصفوف (نفس القديم تماماً)
 const defaultStories = [
