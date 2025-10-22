@@ -1,9 +1,9 @@
-// 📡 رابط Google Apps Script الجديد
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbxnHW1XWSoB-sI3_hMaRcMBGv0TN3ocaB4223wHshfVXZpcaKdvzYeq3NV8XGC5siy4/exec";
+// إعداد Firebase Realtime Database
+const FIREBASE_URL = "https://library-asmaa-default-rtdb.firebaseio.com/"; // <-- ضعي رابطك هنا
 
-// 🏫 جميع القصص حسب الصفوف (نفس القديم تماماً)
+// جميع القصص (نفسها تماماً)
 const defaultStories = [
-  { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
+ { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
   { title: "لارا الخنفساء الصفراء", file: "stories/grade1/story86.pdf", grade: 1 , cover: "images/story86_cover.png" },
   { title: "أنا ساساعد ", file: "stories/grade1/story1.pdf", grade: 1 , cover: "images/story1_cover.png" },
   { title: " أغنية زينة ", file: "stories/grade1/story2.pdf", grade: 1 , cover: "images/story2_cover.png" },
@@ -85,8 +85,7 @@ const defaultStories = [
   { title: "لويس برايل", file: "stories/grade7/story90.pdf", grade: 7 , cover: "images/story90_cover.png" }
 ];
 
-
-// 📚 عرض القصص حسب الصف
+// عرض القصص حسب الصف
 function renderStoriesByGrade(grade) {
   const content = document.getElementById("content");
   content.innerHTML = "";
@@ -111,53 +110,60 @@ function renderStoriesByGrade(grade) {
   content.appendChild(section);
 }
 
-// 🧾 تسجيل قراءة قصة + حفظها سحابياً في Google Sheets
+// قراءة قصة + حفظ في Firebase
 function readStory(title, file) {
   const studentName = prompt("👩‍🎓 أدخل اسمك:");
   if (!studentName) return;
 
-  // ✅ تخزين احتياطي محلي (نفس النظام القديم)
-  const data = JSON.parse(localStorage.getItem("studentsData")) || {};
-  if (!data[studentName]) data[studentName] = [];
-  if (!data[studentName].includes(title)) data[studentName].push(title);
-  localStorage.setItem("studentsData", JSON.stringify(data));
+  // جلب سجل الطالبة من Firebase
+  fetch(`${FIREBASE_URL}/students/${encodeURIComponent(studentName)}.json`)
+    .then(res => res.json())
+    .then(data => {
+      const stories = data?.stories || [];
 
-  // ☁️ إرسال للـ Google Sheets
-  fetch(SHEET_URL, {
-    method: "POST",
-    body: JSON.stringify({ name: studentName, story: title }),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(res => res.text())
-  .then(console.log)
-  .catch(console.error);
+      // إذا لم تكن القصة مقروءة مسبقاً
+      if (!stories.includes(title)) {
+        stories.push(title);
 
-  // 📖 فتح القصة في تبويب جديد
-  window.open(file, "_blank");
+        // حفظ التحديث في Firebase
+        fetch(`${FIREBASE_URL}/students/${encodeURIComponent(studentName)}.json`, {
+          method: "PUT",
+          body: JSON.stringify({ stories }),
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+
+      // فتح القصة
+      window.open(file, "_blank");
+    })
+    .catch(console.error);
 }
 
-// 🎯 لوحة المتابعة (Dashboard)
+// لوحة التحكم (عرض عدد القصص لكل طالبة)
 function showDashboard() {
   const content = document.getElementById("content");
   content.innerHTML = "<p>⏳ جاري تحميل البيانات...</p>";
 
-  fetch(SHEET_URL)
+  fetch(`${FIREBASE_URL}/students.json`)
     .then(res => res.json())
     .then(data => {
+      if (!data) {
+        content.innerHTML = "<p>⚠️ لا توجد بيانات بعد.</p>";
+        return;
+      }
+
       let html = `
         <h2>📊 لوحة متابعة الطالبات</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;text-align:center;">
-          <tr style="background:#f3e8ff;"><th>اسم الطالبة</th><th>عدد القصص المقروءة</th></tr>
+          <tr style="background:#f0e6ff;"><th>اسم الطالبة</th><th>عدد القصص المقروءة</th></tr>
       `;
 
-      data.forEach(row => {
-        html += `<tr><td>${row.name}</td><td>${row.count}</td></tr>`;
+      Object.keys(data).forEach(name => {
+        const count = data[name].stories ? data[name].stories.length : 0;
+        html += `<tr><td>${name}</td><td>${count}</td></tr>`;
       });
 
-      html += `</table>
-      <br>
-      <button onclick="renderStoriesByGrade(1)">⬅️ رجوع</button>`;
-
+      html += `</table><br><button onclick="renderStoriesByGrade(1)">⬅️ رجوع</button>`;
       content.innerHTML = html;
     })
     .catch(err => {
@@ -166,7 +172,7 @@ function showDashboard() {
     });
 }
 
-// 🔐 دخول الأدمن
+// تسجيل دخول الأدمن
 function adminLogin() {
   const password = prompt("🔑 أدخل كلمة المرور:");
   if (password === "1974") {
