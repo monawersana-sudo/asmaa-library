@@ -1,7 +1,7 @@
-// رابط Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzTLP50DLLnLGnkZh2GoYGA88p90PwjsxhzMm5ONiZP_4DaUUGjO_7Is9mGx5OGxZRj/exec";
+// 📡 رابط Google Apps Script الجديد
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxKfwyQXMlbk5pSbErsSp_JYJvMbojmeQ0qiDLzHfaSgbNhs-xTUvM33jx261ENaFLV/exec";
 
-// جميع القصص الكاملة من الصف الأول إلى السابع
+// 🏫 جميع القصص حسب الصفوف (نفس القديم تماماً)
 const defaultStories = [
   { title: "ماذا لو", file: "stories/grade1/story85.pdf", grade: 1 , cover: "images/story85_cover.png" },
   { title: "لارا الخنفساء الصفراء", file: "stories/grade1/story86.pdf", grade: 1 , cover: "images/story86_cover.png" },
@@ -84,7 +84,9 @@ const defaultStories = [
   { title: "البخيل و زوجته الجشعة", file: "stories/grade7/story83.pdf", grade: 7 , cover: "images/story83_cover.png" },
   { title: "لويس برايل", file: "stories/grade7/story90.pdf", grade: 7 , cover: "images/story90_cover.png" }
 ];
-// عرض القصص حسب الصف
+
+
+// 📚 عرض القصص حسب الصف
 function renderStoriesByGrade(grade) {
   const content = document.getElementById("content");
   content.innerHTML = "";
@@ -109,18 +111,18 @@ function renderStoriesByGrade(grade) {
   content.appendChild(section);
 }
 
-// قراءة قصة + حفظ في Google Sheets
+// 🧾 تسجيل قراءة قصة + حفظها سحابياً في Google Sheets
 function readStory(title, file) {
   const studentName = prompt("👩‍🎓 أدخل اسمك:");
   if (!studentName) return;
 
-  // تخزين محلي
+  // ✅ تخزين احتياطي محلي (نفس النظام القديم)
   const data = JSON.parse(localStorage.getItem("studentsData")) || {};
   if (!data[studentName]) data[studentName] = [];
   if (!data[studentName].includes(title)) data[studentName].push(title);
   localStorage.setItem("studentsData", JSON.stringify(data));
 
-  // حفظ على Google Sheets
+  // ☁️ إرسال للـ Google Sheets
   fetch(SHEET_URL, {
     method: "POST",
     body: JSON.stringify({ name: studentName, story: title }),
@@ -130,11 +132,11 @@ function readStory(title, file) {
   .then(console.log)
   .catch(console.error);
 
-  // فتح القصة
+  // 📖 فتح القصة في تبويب جديد
   window.open(file, "_blank");
 }
 
-// Dashboard - عرض من Google Sheets
+// 🎯 لوحة المتابعة (Dashboard)
 function showDashboard() {
   const content = document.getElementById("content");
   content.innerHTML = "<p>⏳ جاري تحميل البيانات...</p>";
@@ -142,22 +144,15 @@ function showDashboard() {
   fetch(SHEET_URL)
     .then(res => res.json())
     .then(data => {
-      const studentCounts = {};
-
-      data.forEach(row => {
-        if (!studentCounts[row.name]) studentCounts[row.name] = new Set();
-        studentCounts[row.name].add(row.story);
-      });
-
       let html = `
-        <h2>📊 لوحة متابعة الطلاب</h2>
+        <h2>📊 لوحة متابعة الطالبات</h2>
         <table border="1" cellpadding="6" style="border-collapse:collapse;width:100%;text-align:center;">
-          <tr style="background:#f0e6ff;"><th>اسم الطالبة</th><th>عدد القصص المقروءة</th></tr>
+          <tr style="background:#f3e8ff;"><th>اسم الطالبة</th><th>عدد القصص المقروءة</th></tr>
       `;
 
-      for (let name in studentCounts) {
-        html += `<tr><td>${name}</td><td>${studentCounts[name].size}</td></tr>`;
-      }
+      data.forEach(row => {
+        html += `<tr><td>${row.name}</td><td>${row.count}</td></tr>`;
+      });
 
       html += `</table>
       <br>
@@ -171,7 +166,7 @@ function showDashboard() {
     });
 }
 
-// تسجيل دخول الأدمن
+// 🔐 دخول الأدمن
 function adminLogin() {
   const password = prompt("🔑 أدخل كلمة المرور:");
   if (password === "1974") {
